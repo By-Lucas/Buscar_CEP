@@ -5,8 +5,9 @@ E ADICIONADO ERRO AO DIGITAR CEP INCORRETO
 
 GITHUB = https://github.com/by-lucas
 LINKEDIN = https://www.linkedin.com/in/lucastk/
-WHATISAPP = 74981199190
+WHATISAPP = 74981199190 PARA CONTRATAR FREELANCER
 """
+
 
 # BIBLIOTECAS
 import requests
@@ -15,28 +16,26 @@ import sys
 
 os.system('cls')
 
-# Repetição em casos de erros de digitação
 while True:
     try:
         cep = input("Digite seu CEP: ")
 
         if len(cep) != 8:
             print("[+] O CEP deve conter apenas 8 digitos.\n")
-            novamente = input("Deseja tentar novamente?\nDigite S para sim ou N para não: ")
+            novamente = input("Deseja tentar novamente?\nDigite S para sim ou N para não: ").upper()
         else:
             break
     except:
         print('\n Opção invalida')
 
-    if novamente == 'S' or novamente == 's':
+    if novamente == 'S':
         continue
-    elif novamente == 'N' or novamente == 'n':
+    elif novamente == 'N':
         print("Até mais...")
         exit()
     else:
         print("\nOpção digitada é invalidada!\nTente novamente:\n")
 
-# Requests chamando o CEP digitado
 r = requests.get('https://viacep.com.br/ws/{}/json/'.format(cep))
 
 # Convertendo dados
@@ -53,4 +52,3 @@ if 'erro' not in data:
     print("| Bairro: {}".format(data['bairro']))
 else:
     print("O CEP {} não é válido!".format(cep))
-
